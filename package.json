@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/rbarbosa51/elite-enterprise-content-management-system/issues"
   },
-  "homepage": "https://github.com/rbarbosa51/elite-enterprise-content-management-system#readme"
+  "homepage": "https://github.com/rbarbosa51/elite-enterprise-content-management-system#readme",
+  "dependencies": {
+    "ansi-escape-sequences": "^6.2.1",
+    "chalk": "^5.2.0",
+    "console.table": "^0.10.0",
+    "figlet": "^1.5.2",
+    "inquirer": "^9.1.4",
+    "mysql2": "^3.0.1"
+  }
 }
