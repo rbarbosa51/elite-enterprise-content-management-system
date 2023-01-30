@@ -1,6 +1,7 @@
 import HeroBanner from "./src/HeroBanner.js";
 import ClearScreen from "./src/ClearScreen.js";
 import ViewDepartment from "./src/ViewDepartments.js";
+import ViewRoles from "./src/ViewRoles.js";
 import inquirer from "inquirer";
 
 async function main() {
@@ -28,7 +29,8 @@ async function main() {
                     ViewDepartment();
                     break;
                 case 'View all roles':
-                    
+                    ViewRoles();
+                    break;
                 default: //Quit
                     finished = true;
                     break;
