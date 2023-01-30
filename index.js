@@ -1,6 +1,6 @@
 import HeroBanner from "./src/HeroBanner.js";
 import ClearScreen from "./src/ClearScreen.js";
-import MainMenu from "./src/MainMenu.js";
+import ViewDepartment from "./src/ViewDepartments.js";
 import inquirer from "inquirer";
 
 async function main() {
@@ -12,7 +12,6 @@ async function main() {
     let finished = false;
     while (!finished) {
         //Every Subsequent call will clear the screen
-        ClearScreen();
         await inquirer.prompt([
             {
                 type: 'list',
@@ -26,8 +25,10 @@ async function main() {
         ]).then (answer => {
             switch (answer.mainChoice) {
                 case 'View all departments':
-                    console.log('View all departments');
+                    ViewDepartment();
                     break;
+                case 'View all roles':
+                    
                 default: //Quit
                     finished = true;
                     break;

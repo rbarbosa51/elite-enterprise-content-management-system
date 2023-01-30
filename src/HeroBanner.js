@@ -10,7 +10,7 @@ export default function HeroBanner() {
   });
   //contessa
   //Figlet only returns a string.  It has to be shown in the screen via console.log
-  console.log(chalk.bold.red(figText));
+  console.log(chalk.bold.yellowBright(figText));
   //Delay for 5 seconds
   const initTime = Date.now();
   //Get the current time and subtract the initTime once its over 5000ms (then end delay)
