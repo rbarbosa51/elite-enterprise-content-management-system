@@ -1,6 +1,7 @@
-import mysql from 'mysql2';
+const mysql = require('mysql2');
+const _ = require('console.table');
 
-export default async function ViewDepartment() {
+async function ViewDepartment() {
     const db = await mysql.createConnection(
         {
             host: '127.0.0.1',
@@ -21,3 +22,4 @@ export default async function ViewDepartment() {
     //close the connection
     db.end();
 }
+module.exports = ViewDepartment;

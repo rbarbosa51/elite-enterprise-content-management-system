@@ -1,6 +1,7 @@
-import mysql from 'mysql2';
+const mysql = require('mysql2');
+const _ = require('console.table');
 
-export default async function ViewRoles() {
+async function ViewRoles() {
     const db = await mysql.createConnection(
         {
             host: '127.0.0.1',
@@ -26,3 +27,4 @@ JOIN book_prices ON favorite_books.book_price = book_prices.id;
     //closes the connection
     db.end();
 }
+module.exports = ViewRoles;

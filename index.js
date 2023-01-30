@@ -1,8 +1,13 @@
-import HeroBanner from "./src/HeroBanner.js";
-import ClearScreen from "./src/ClearScreen.js";
-import ViewDepartment from "./src/ViewDepartments.js";
-import ViewRoles from "./src/ViewRoles.js";
-import inquirer from "inquirer";
+/* Imports
+The main file index.js is set to type module (as opposed to commonJS) in the package.json file.
+The import treats the file as commonjs if it sees the .cjs extension, and .mjs as module
+This was needed to be able to utilize packages that only supported either one or the other
+*/
+import HeroBanner from './src/HeroBanner.mjs'
+import ClearScreen from './src/ClearScreen.mjs';
+import ViewDepartment from './src/ViewDepartments.cjs';
+import ViewRoles from './src/ViewRoles.cjs';
+import inquirer from 'inquirer';
 
 async function main() {
     //Clear the screen

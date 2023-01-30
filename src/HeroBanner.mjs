@@ -1,6 +1,7 @@
-import chalk from "chalk";
-import figlet from "figlet";
-
+//const chalk = require('chalk');
+import chalk from 'chalk';
+//const figlet = require('figlet');
+import figlet from 'figlet';
 //This function generates a banner
 export default function HeroBanner() {
   //Show Hero Banner Using the Contessa Figlet font
@@ -18,3 +19,4 @@ export default function HeroBanner() {
     //Waste clock cycles (5 seconds)
   }
 }
+//module.exports = HeroBanner;
