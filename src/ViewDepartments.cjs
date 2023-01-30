@@ -16,7 +16,7 @@ async function ViewDepartment() {
             console.log(err);
         }
         //Two new line breaks for visual padding
-        console.log("\n\n");
+        console.log("\n");
         console.table(result);
     })
     //close the connection

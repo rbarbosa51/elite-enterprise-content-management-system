@@ -7,6 +7,7 @@ import HeroBanner from './src/HeroBanner.mjs'
 import ClearScreen from './src/ClearScreen.mjs';
 import ViewDepartment from './src/ViewDepartments.cjs';
 import ViewRoles from './src/ViewRoles.cjs';
+import ViewEmployees from './src/ViewEmployees.cjs';
 import inquirer from 'inquirer';
 
 async function main() {
@@ -35,6 +36,9 @@ async function main() {
                     break;
                 case 'View all roles':
                     ViewRoles();
+                    break;
+                case 'View all employees':
+                    ViewEmployees();
                     break;
                 default: //Quit
                     finished = true;
