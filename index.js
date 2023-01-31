@@ -4,18 +4,21 @@ The import treats the file as commonjs if it sees the .cjs extension, and .mjs a
 This was needed to be able to utilize packages that only supported either one or the other
 */
 import HeroBanner from './src/HeroBanner.mjs'
-import ClearScreen from './src/ClearScreen.mjs';
 import ViewDepartment from './src/ViewDepartments.cjs';
 import ViewRoles from './src/ViewRoles.cjs';
 import ViewEmployees from './src/ViewEmployees.cjs';
+import AddDepartment from './src/AddDepartment.mjs';
+import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
 
 async function main() {
     //Clear the screen
-    ClearScreen();
+    //ClearScreen();
+    console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
     //Display initial banner
     HeroBanner();
-    ClearScreen();
+    //ClearScreen();
+    console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
     let finished = false;
     while (!finished) {
         //Every Subsequent call will clear the screen
@@ -23,7 +26,7 @@ async function main() {
             {
                 type: 'list',
                 name: 'mainChoice',
-                message: 'Choose from the following options: ',
+                message: `${ansi.erase.display(2)} ${ansi.cursor.position()}Choose from the following options: `,
                 choices: ['View all departments', 'View all roles', 
                           'View all employees', 'Add a department', 
                           'Add a role', 'Add an employee', 'Update an employee role', 
@@ -40,6 +43,15 @@ async function main() {
                 case 'View all employees':
                     ViewEmployees();
                     break;
+                case 'Add a department':
+                    inquirer.prompt([
+                        {name: 'departmentName',
+                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`}
+                    ]).then(answer => {
+                        AddDepartment(answer.departmentName);
+                    })
+                    
+                    break;
                 default: //Quit
                     finished = true;
                     break;
@@ -47,6 +59,6 @@ async function main() {
         });
     }
     
-    console.log('Outside main loop\n');
+    console.log('Thanks for using me!\n');
 }
 main();

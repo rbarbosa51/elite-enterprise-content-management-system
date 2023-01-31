@@ -11,7 +11,7 @@ async function ViewDepartment() {
         },
         console.log("Connected")
     );
-    db.query('SELECT * FROM department;', (err,result) => {
+    db.query('SELECT * FROM department ORDER BY id;', (err,result) => {
         if (err) {
             console.log(err);
         }

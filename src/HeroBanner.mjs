@@ -1,6 +1,4 @@
-//const chalk = require('chalk');
 import chalk from 'chalk';
-//const figlet = require('figlet');
 import figlet from 'figlet';
 //This function generates a banner
 export default function HeroBanner() {
