@@ -11,12 +11,13 @@ async function ViewEmployees() {
         },
         console.log("Connected")
     );
-    
-    db.query(`SELECT employee.id, employee.first_name, employee.last_name, role.title,department.name AS department ,role.salary
-              FROM employee 
-              JOIN role ON employee.role_id = role.id
+    //  THANK YOU TORRE  --->>>
+    db.query(`SELECT emp1.id, emp1.first_name, emp1.last_name, role.title,department.name AS department ,role.salary, CONCAT(emp2.first_name, ' ', emp2.last_name) as manager
+              FROM employee emp1
+              JOIN role ON emp1.role_id = role.id
               JOIN department ON role.department_id = department.id
-              ORDER BY employee.id;`, (err,result) => {
+              LEFT JOIN employee emp2 ON emp1.manager_id = emp2.id
+              ORDER BY emp1.id;`, (err,result) => {
         if (err) {
             console.log(err);
         }
