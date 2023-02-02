@@ -2,14 +2,7 @@ import mysql from 'mysql2';
 import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
 
-/*
-inquirer.prompt([
-                        {name: 'departmentName',
-                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`}
-                    ]).then(answer => {
-                        AddDepartment(answer.departmentName);
-                    });
-*/
+
 export default async function AddDepartment() {
     let departmentName;
     await inquirer.prompt([

@@ -22,8 +22,6 @@ async function ViewEmployees() {
         if (err) {
             console.log(err);
         }
-        //padding
-        //console.log('\n');
         console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
         console.table(result);
     })

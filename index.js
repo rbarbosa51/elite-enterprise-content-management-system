@@ -8,6 +8,7 @@ import ViewDepartment from './src/ViewDepartments.cjs';
 import ViewRoles from './src/ViewRoles.cjs';
 import ViewEmployees from './src/ViewEmployees.cjs';
 import AddDepartment from './src/AddDepartment.mjs';
+import AddRole from './src/AddRole.mjs';
 import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
 
@@ -26,7 +27,7 @@ async function main() {
             {
                 type: 'list',
                 name: 'mainChoice',
-                message: `${ansi.erase.display(2)} ${ansi.cursor.position()}Choose from the following options: `,
+                message: `Choose from the following options: `,
                 choices: ['View all departments', 'View all roles', 
                           'View all employees', 'Add a department', 
                           'Add a role', 'Add an employee', 'Update an employee role', 
@@ -47,15 +48,7 @@ async function main() {
                     currentSelection = 4;
                     break;
                 case 'Add a role':
-                    let tmpRoleName, tmpRoleSalary, tmpRoleDepartment;
-                    inquirer.prompt([
-                        {name: 'roleName',
-                        message: `What is the name of the role?`
-                        }
-                    ]).then(answer => {
-                        tmpRoleName = answer.roleName;
-                    });
-                    console.log(`The answer was ${tmpRoleName}`);
+                    currentSelection = 5;
                     break;
                 default: //Quit
                     finished = true;
@@ -80,6 +73,10 @@ async function main() {
             case 4:
                 console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
                 AddDepartment();
+                break;
+            case 5:
+                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+                if (AddRole()) {console.log('Wrote the role')}
                 break;
             default: //Quit
                 finished = true;
