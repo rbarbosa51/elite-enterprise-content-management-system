@@ -10,6 +10,17 @@ import ViewEmployees from './src/ViewEmployees.cjs';
 import AddDepartment from './src/AddDepartment.mjs';
 import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
+/*
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+readline.question('Who are you?', name => {
+  console.log(`Hey there ${name}!`);
+  readline.close();
+});
+*/
 
 async function main() {
     //Clear the screen
@@ -26,7 +37,7 @@ async function main() {
             {
                 type: 'list',
                 name: 'mainChoice',
-                message: `${ansi.erase.display(2)} ${ansi.cursor.position()}Choose from the following options: `,
+                message: `Choose from the following options: `,
                 choices: ['View all departments', 'View all roles', 
                           'View all employees', 'Add a department', 
                           'Add a role', 'Add an employee', 'Update an employee role', 
@@ -49,8 +60,18 @@ async function main() {
                         message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`}
                     ]).then(answer => {
                         AddDepartment(answer.departmentName);
-                    })
-                    
+                    });
+                    break;
+                case 'Add a role':
+                    let tmpRoleName, tmpRoleSalary, tmpRoleDepartment;
+                    inquirer.prompt([
+                        {name: 'roleName',
+                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the role?`
+                        }
+                    ]).then(answer => {
+                        tmpRoleName = answer.roleName;
+                    });
+                    console.log(`The answer was ${tmpRoleName}`);
                     break;
                 default: //Quit
                     finished = true;

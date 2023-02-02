@@ -1,17 +1,4 @@
-import ansi from "ansi-escape-sequences";
 import mysql from 'mysql2';
-
-/*
-const db = await mysql.createConnection(
-        {
-            host: '127.0.0.1',
-            user: 'root',
-            password: 'toor',
-            database: 'eliteEnterpriseCMS'
-        },
-        console.log("Connected")
-    );
-*/
 
 export default async function AddDepartment(departmentName) {
     const db = await mysql.createConnection(
