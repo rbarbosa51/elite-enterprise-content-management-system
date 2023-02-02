@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
-const _ = require('console.table');
+require('console.table');
+const ansi = require('ansi-escape-sequences');
 
 async function ViewRoles() {
     const db = await mysql.createConnection(
@@ -20,8 +21,7 @@ async function ViewRoles() {
             console.log(err);
         }
         //Two new line breaks for visual padding
-        console.log("\n");
-        //console.log(result)
+        console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
         console.table(result);
     })
     //closes the connection

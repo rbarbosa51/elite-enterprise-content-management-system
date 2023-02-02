@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
-const _ = require('console.table');
+require('console.table');
+const ansi = require('ansi-escape-sequences');
 
 async function ViewDepartment() {
     const db = await mysql.createConnection(
@@ -15,8 +16,7 @@ async function ViewDepartment() {
         if (err) {
             console.log(err);
         }
-        //Two new line breaks for visual padding
-        console.log("\n");
+        console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
         console.table(result);
     })
     //close the connection

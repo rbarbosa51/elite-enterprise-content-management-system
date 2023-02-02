@@ -1,6 +1,25 @@
 import mysql from 'mysql2';
+import ansi from "ansi-escape-sequences";
+import inquirer from 'inquirer';
 
-export default async function AddDepartment(departmentName) {
+/*
+inquirer.prompt([
+                        {name: 'departmentName',
+                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`}
+                    ]).then(answer => {
+                        AddDepartment(answer.departmentName);
+                    });
+*/
+export default async function AddDepartment() {
+    let departmentName;
+    await inquirer.prompt([
+        {
+            name: 'departmentName',
+            message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`
+        }
+    ]).then(answer => {
+        departmentName = answer.departmentName;
+    })
     const db = await mysql.createConnection(
         {
             host: '127.0.0.1',
@@ -8,7 +27,6 @@ export default async function AddDepartment(departmentName) {
             password: 'toor',
             database: 'eliteEnterpriseCMS'
         },
-        console.log("Connected")
     );
     db.query(`INSERT INTO department (name)
               VALUES ("${departmentName}");`)

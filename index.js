@@ -10,17 +10,6 @@ import ViewEmployees from './src/ViewEmployees.cjs';
 import AddDepartment from './src/AddDepartment.mjs';
 import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
-/*
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-readline.question('Who are you?', name => {
-  console.log(`Hey there ${name}!`);
-  readline.close();
-});
-*/
 
 async function main() {
     //Clear the screen
@@ -32,12 +21,12 @@ async function main() {
     console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
     let finished = false;
     while (!finished) {
-        //Every Subsequent call will clear the screen
+        let currentSelection;
         await inquirer.prompt([
             {
                 type: 'list',
                 name: 'mainChoice',
-                message: `Choose from the following options: `,
+                message: `${ansi.erase.display(2)} ${ansi.cursor.position()}Choose from the following options: `,
                 choices: ['View all departments', 'View all roles', 
                           'View all employees', 'Add a department', 
                           'Add a role', 'Add an employee', 'Update an employee role', 
@@ -46,27 +35,22 @@ async function main() {
         ]).then (answer => {
             switch (answer.mainChoice) {
                 case 'View all departments':
-                    ViewDepartment();
+                    currentSelection = 1;
                     break;
                 case 'View all roles':
-                    ViewRoles();
+                    currentSelection = 2;
                     break;
                 case 'View all employees':
-                    ViewEmployees();
+                    currentSelection = 3;
                     break;
                 case 'Add a department':
-                    inquirer.prompt([
-                        {name: 'departmentName',
-                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`}
-                    ]).then(answer => {
-                        AddDepartment(answer.departmentName);
-                    });
+                    currentSelection = 4;
                     break;
                 case 'Add a role':
                     let tmpRoleName, tmpRoleSalary, tmpRoleDepartment;
                     inquirer.prompt([
                         {name: 'roleName',
-                        message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the role?`
+                        message: `What is the name of the role?`
                         }
                     ]).then(answer => {
                         tmpRoleName = answer.roleName;
@@ -78,6 +62,30 @@ async function main() {
                     break;
             }
         });
+        /*I moved the function calls outside of the then loop because it created a timing problem of a promise then 
+        waiting on another promise*/
+        switch (currentSelection) {
+            case 1:
+                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+                ViewDepartment();
+                break;
+            case 2:
+                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+                ViewRoles();
+                break;
+            case 3:
+                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+                ViewEmployees();
+                break;
+            case 4:
+                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+                AddDepartment();
+                break;
+            default: //Quit
+                finished = true;
+                break;
+            
+        }
     }
     
     console.log('Thanks for using me!\n');
