@@ -1,8 +1,13 @@
 import inquirer from "inquirer";
+import ClearScreen from "./ClearScreen.js";
 import ViewDepartment from './ViewDepartments.js';
-import ansi from 'ansi-escape-sequences';
+import ViewRoles from "./ViewRoles.js";
+import ViewEmployees from "./ViewEmployees.js";
 
 export default function MainPrompt() {
+    //Clear Screen
+    ClearScreen();
+    //Main Prompt
     inquirer.prompt([
         {
             type: 'list',
@@ -16,14 +21,13 @@ export default function MainPrompt() {
     ]).then (answer => {
         switch (answer.mainChoice) {
             case 'View all departments':
-                console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
                 ViewDepartment();
                 break;
             case 'View all roles':
-                //
+                ViewRoles();
                 break;
             case 'View all employees':
-                //
+                ViewEmployees();
                 break;
             case 'Add a department':
                 //

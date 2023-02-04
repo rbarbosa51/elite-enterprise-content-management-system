@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
+
 //This function generates a banner
 export default function HeroBanner() {
   //Show Hero Banner Using the Contessa Figlet font
@@ -7,8 +8,9 @@ export default function HeroBanner() {
     font: "contessa",
     horizontalLayout: "full",
   });
-  //contessa
+  //contessa font is pretty cool
   //Figlet only returns a string.  It has to be shown in the screen via console.log
+  //Using Chalk to make it bold and yellow.
   console.log(chalk.bold.yellowBright(figText));
   //Delay for 5 seconds
   const initTime = Date.now();
@@ -17,4 +19,3 @@ export default function HeroBanner() {
     //Waste clock cycles (5 seconds)
   }
 }
-//module.exports = HeroBanner;

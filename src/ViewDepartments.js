@@ -1,9 +1,10 @@
 import mysql from 'mysql2';
 import 'console.table';
-import ansi from 'ansi-escape-sequences';
-import MainPrompt from './MainPrompt.mjs';
+import ClearScreen from './ClearScreen.js';
+import MainPrompt from './MainPrompt.js';
 
 export default async function ViewDepartment() {
+    //Create the database connection
     const db = await mysql.createConnection(
         {
             host: '127.0.0.1',
@@ -13,15 +14,17 @@ export default async function ViewDepartment() {
         },
         console.log("Connected")
     );
+    //Select all from department
     db.query('SELECT * FROM department ORDER BY id;', (err,result) => {
         if (err) {
             console.log(err);
         }
-        console.log(`${ansi.erase.display(2)} ${ansi.cursor.position()}`);
+        ClearScreen();
+        console.log('Viewing All Departments\n');
         console.table(result);
     })
     //close the connection
     db.end();
+    //Go back to the main prompt
     MainPrompt();
 }
-//module.exports = ViewDepartment;
