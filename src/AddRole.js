@@ -1,6 +1,7 @@
 import mysql from 'mysql2';
-import ansi from "ansi-escape-sequences";
+import ClearScreen from './ClearScreen.js';
 import inquirer from 'inquirer';
+import MainPrompt from './MainPrompt.js';
 
 
 export default async function AddRole() {
@@ -15,6 +16,7 @@ export default async function AddRole() {
             database: 'eliteEnterpriseCMS'
         },
     );
+    //First get all of the departments
     db.query('SELECT * FROM department ORDER BY id;', (err,result) => {
         if (err) {
             console.log(err);
@@ -24,29 +26,34 @@ export default async function AddRole() {
             departmentArrays.push(n.name);
         });
     })
-    
+    //Once I have all of the departments stored, then ask for the rest of the info
+    ClearScreen();
     let roleName, roleSalary, selectedDepartment, departmentID;
     await inquirer.prompt([
         {
             name: 'roleName',
-            message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the role?`
+            message: 'What is the name of the role?'
         }
     ]).then(answer => {
         roleName = answer.roleName;
     })
+    //It looks better if the screen refreshes after every question
+    ClearScreen();
     await inquirer.prompt([
         {
             name: 'roleSalary',
-            message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the salary of the role?`
+            message: 'What is the salary of the role?'
         }
     ]).then(answer => {
         roleSalary = answer.roleSalary;
     })
+    ClearScreen();
+    //Ask which department (from the list)
     await inquirer.prompt([
         {
             type: 'list',
             name: 'selectedDepartment',
-            message: `${ansi.erase.display(2)} ${ansi.cursor.position()}Which department does the role belong to?`,
+            message: 'Which department does the role belong to?',
             choices: departmentArrays
         }
     ]).then(answer => {
@@ -62,7 +69,12 @@ export default async function AddRole() {
         return false;
     })
     db.end();
+    //Clear the screen and let the user now that the department was written to the table
+    ClearScreen()
     console.log(`${selectedDepartment} was added to the role table\n`);
-    return true;
+    //Wait 1 second
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 1000){}
+    MainPrompt();
     
 }

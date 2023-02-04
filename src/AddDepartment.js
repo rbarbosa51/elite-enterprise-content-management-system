@@ -1,14 +1,15 @@
 import mysql from 'mysql2';
-import ansi from "ansi-escape-sequences";
 import inquirer from 'inquirer';
-
+import ClearScreen from './ClearScreen.js';
+import MainPrompt from './MainPrompt.js';
 
 export default async function AddDepartment() {
+    ClearScreen();
     let departmentName;
     await inquirer.prompt([
         {
             name: 'departmentName',
-            message: `${ansi.erase.display(2)} ${ansi.cursor.position()}What is the name of the department?`
+            message: 'What is the name of the department?'
         }
     ]).then(answer => {
         departmentName = answer.departmentName;
@@ -21,9 +22,16 @@ export default async function AddDepartment() {
             database: 'eliteEnterpriseCMS'
         },
     );
+    //Insert query
     db.query(`INSERT INTO department (name)
-              VALUES ("${departmentName}");`)
+              VALUES ("${departmentName}");`);
+    //Close the database connection
     db.end();
+    ClearScreen();
     console.log(`${departmentName} was added to the department table\n`);
+    //Wait one second before going to Main Propmt
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 1000){}
+    MainPrompt();
     
 }

@@ -3,6 +3,8 @@ import ClearScreen from "./ClearScreen.js";
 import ViewDepartment from './ViewDepartments.js';
 import ViewRoles from "./ViewRoles.js";
 import ViewEmployees from "./ViewEmployees.js";
+import AddDepartment from "./AddDepartment.js";
+import AddRole from "./AddRole.js";
 
 export default function MainPrompt() {
     //Clear Screen
@@ -30,10 +32,10 @@ export default function MainPrompt() {
                 ViewEmployees();
                 break;
             case 'Add a department':
-                //
+                AddDepartment();
                 break;
             case 'Add a role':
-                //
+                AddRole();
                 break;
             default: //Quit
                 process.exit(0);
