@@ -39,7 +39,7 @@ export default async function UpdateEmployeeManager() {
             const managerID = JSON.parse(`{"id":"${m.id}", "fullName": "${tmpFullName}"}`);
             managerArray.push(managerID);
         });
-        console.log(managerNames);
+        //console.log(managerNames);
     })
     .catch(console.log);
     //Clear the screen
