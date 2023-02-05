@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import figlet from 'figlet';
+import chalk from "chalk";
+import figlet from "figlet";
 
 //This function generates a banner
 export default function HeroBanner() {

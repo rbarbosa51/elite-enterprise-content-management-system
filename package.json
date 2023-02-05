@@ -25,5 +25,8 @@
     "figlet": "^1.5.2",
     "inquirer": "^9.1.4",
     "mysql2": "^3.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.3"
   }
 }
