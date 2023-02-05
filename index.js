@@ -7,7 +7,7 @@ async function main() {
   ClearScreen();
   //Display initial banner
   HeroBanner();
-  //CLear the screen to remove the hero banner
+  //Clear the screen to remove the hero banner
   ClearScreen();
   //Initiate the app (main prompt)
   await MainPrompt();

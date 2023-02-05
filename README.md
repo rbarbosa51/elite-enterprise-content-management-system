@@ -10,6 +10,7 @@ This is an enterprise content management system. It allows the easy viewing ,, m
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Screenshot](#screenshot)
 - [License](#license)
 - [Contributing](#contributing)
 - [Tests](#tests)
@@ -23,13 +24,17 @@ To utilize this project, first downdload the code. Then npm install in the proje
 
 node index.js
 
+## Screenshot
+
+[![A video thumbnail ](./assets/screenshot.png)](https://drive.google.com/file/d/1pa1OGJvvbo8WGRaGIt2uiTmiiB2VLJSR/view)
+
 ## License
 
 This project is covered under the following: MIT License
 
 ## Contributing
 
-N/A
+To contribute, write a GitHub issue
 
 ## Tests
 
