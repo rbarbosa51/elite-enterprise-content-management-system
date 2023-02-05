@@ -30,8 +30,6 @@ export default async function AddEmployee() {
         result.forEach((n) => {
             roleArray.push(n.title);
         });
-        //debug
-        //console.log(rawRoleResults);
     });
     //get employees that have null as manager_id (In other words select all managers).
     //managerArray stores both the name of the Manager as well as its id
