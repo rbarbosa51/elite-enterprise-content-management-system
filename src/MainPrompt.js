@@ -11,6 +11,7 @@ import UpdateEmployeeManager from "./UpdateEmployeeManager.js";
 import ViewEmployeeByManager from './ViewEmployeeByManager.js'
 import ViewEmployeeByDepartment from "./ViewEmployeeByDepartment.js";
 import ViewDepartmentBudget from './ViewDepartmentBudget.js'
+import DeleteEmployee from "./DeleteEmployee.js";
 
 export default function MainPrompt() {
     //Clear Screen
@@ -26,7 +27,7 @@ export default function MainPrompt() {
                       'Add a role', 'Add an employee', 'Update an employee role', 
                       'Bonus - Update an employee manager', 'Bonus - View employee by manager',
                       'Bonus - View employee by department', 'Bonus - View department budget',
-                      'Quit']
+                      'Bonus - Delete employee','Quit']
         }
     ]).then (answer => {
         switch (answer.mainChoice) {
@@ -62,6 +63,9 @@ export default function MainPrompt() {
                 break;
             case 'Bonus - View department budget':
                 ViewDepartmentBudget();
+                break;
+            case 'Bonus - Delete employee':
+                DeleteEmployee();
                 break;
             default: //Quit
                 process.exit(0);
