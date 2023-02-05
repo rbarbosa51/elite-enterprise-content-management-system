@@ -11,24 +11,26 @@ export default async function ViewEmployees() {
             password: 'toor',
             database: 'eliteEnterpriseCMS'
         },
-        console.log("Connected")
+        //console.log("Connected")
     );
+    //View all employees
     //  THANK YOU TORRE !!!!!  --->>>
-    db.query(`SELECT emp1.id, emp1.first_name, emp1.last_name, role.title,department.name AS department ,role.salary, CONCAT(emp2.first_name, ' ', emp2.last_name) as manager
-              FROM employee emp1
-              JOIN role ON emp1.role_id = role.id
-              JOIN department ON role.department_id = department.id
-              LEFT JOIN employee emp2 ON emp1.manager_id = emp2.id
-              ORDER BY emp1.id;`, (err,result) => {
-        if (err) {
-            console.log(err);
-        }
+    await db.promise().query(`SELECT emp1.id, emp1.first_name, emp1.last_name, role.title,department.name AS department ,role.salary, CONCAT(emp2.first_name, ' ', emp2.last_name) as manager
+                            FROM employee emp1
+                            JOIN role ON emp1.role_id = role.id
+                            JOIN department ON role.department_id = department.id
+                            LEFT JOIN employee emp2 ON emp1.manager_id = emp2.id
+                            ORDER BY emp1.id;`)
+    .then( ([result]) => {
         ClearScreen();
         console.log('Viewing all Employees.\n');
         console.table(result);
     })
+    
     //closes the connection
     db.end();
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 3000){}
     //Go back to the main prompt
     MainPrompt();
 }

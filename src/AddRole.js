@@ -17,10 +17,8 @@ export default async function AddRole() {
         },
     );
     //First get all of the departments
-    db.query('SELECT * FROM department ORDER BY id;', (err,result) => {
-        if (err) {
-            console.log(err);
-        }
+    await db.promise().query('SELECT * FROM department ORDER BY id;')
+    .then( ([result]) => {
         rawResults = result;
         result.forEach((n) => {
             departmentArrays.push(n.name);
@@ -57,24 +55,26 @@ export default async function AddRole() {
             choices: departmentArrays
         }
     ]).then(answer => {
-        /*the role table does not store names but id's therefore I need to get 
-        id of whatever department was selected. I use the find() method*/
+        
         selectedDepartment = answer.selectedDepartment;
-        let row = rawResults.find(o => o.name === selectedDepartment);
-        departmentID = row.id;
-        db.query(`INSERT INTO role (title, salary, department_id)
-                  VALUES ("${roleName}", "${roleSalary}", "${departmentID}");`)
+        
     }).catch(err => {
         console.log(err);
         return false;
     })
+    /*The role table does not store names but id's therefore I need to get 
+    id of whatever department was selected. I use the find() method*/
+    let row = rawResults.find(o => o.name === selectedDepartment);
+    departmentID = row.id;
+    //Insert into table
+    await db.promise().query(`INSERT INTO role (title, salary, department_id) VALUES ("${roleName}", "${roleSalary}", "${departmentID}");`)
     db.end();
     //Clear the screen and let the user now that the department was written to the table
     ClearScreen()
     console.log(`${selectedDepartment} was added to the role table\n`);
-    //Wait 1 second
+    //Wait 3 seconds
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 1000){}
+    while ((Date.now() - initTime) <= 3000){}
     MainPrompt();
     
 }

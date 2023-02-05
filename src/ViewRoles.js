@@ -12,22 +12,20 @@ export default async function ViewRoles() {
             password: 'toor',
             database: 'eliteEnterpriseCMS'
         },
-        console.log("Connected")
+        //console.log("Connected")
     );
    //View Roles query
-    db.query(`SELECT role.id, role.title, department.name as deptartment, role.salary 
-              FROM role
-              JOIN department ON role.department_id = department.id ORDER BY role.id;`, (err,result) => {
-        if (err) {
-            console.log(err);
-        }
-        //Clears the screen and then shows the table
-        ClearScreen();
-        console.log('Viewing all Roles.\n');
-        console.table(result);
-    });
+   await db.promise().query(`SELECT role.id, role.title, department.name as deptartment, role.salary FROM role JOIN department ON role.department_id = department.id ORDER BY role.id;`)
+   .then( ([result]) => {
+    ClearScreen();
+    console.log('Viewing all Roles.\n');
+    console.table(result);
+   })
     //closes the connection
     db.end();
-    //Go back to Main Propmt
+    //Wait 3 seconds
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 3000){}
+    //Go back to the main prompt
     MainPrompt();
 }

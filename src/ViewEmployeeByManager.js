@@ -48,8 +48,8 @@ export default async function ViewEmployeeByManager() {
     })
     //Close connection
     db.end();
-    //Wait 5 seconds
+    //Wait 3 seconds
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 5000){}
+    while ((Date.now() - initTime) <= 3000){}
     MainPrompt();
 }

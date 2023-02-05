@@ -22,22 +22,17 @@ export default async function AddEmployee() {
         },
     );
     //First get all of the roles, store rawresults and rolearray
-    db.query('SELECT * FROM role ORDER BY id;', (err,result) => {
-        if (err) {
-            console.log(err);
-        }
+    await db.promise().query('SELECT * FROM role ORDER BY id;')
+    .then( ([result]) => {
         rawRoleResults = result;
         result.forEach((n) => {
             roleArray.push(n.title);
         });
-    });
+    })
     //get employees that have null as manager_id (In other words select all managers).
     //managerArray stores both the name of the Manager as well as its id
-    db.query('SELECT id, first_name, last_name FROM employee WHERE manager_id IS NULL ORDER BY id;', (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        
+    await db.promise().query('SELECT id, first_name, last_name FROM employee WHERE manager_id IS NULL ORDER BY id;')
+    .then( ([result]) => {
         result.forEach(n => {
             //Combine first and last name
             const tmpFullName = `${n.first_name} ${n.last_name}`;
@@ -46,7 +41,7 @@ export default async function AddEmployee() {
             managerArray.push(fullNameID);
         });
         //You still need to compensate in the event the new employee is a manager
-        //Therefor the string is pushed below
+        //Therefore the string is pushed below
         managerNames.push('Employee is a Manager');
     })
     
@@ -107,14 +102,15 @@ export default async function AddEmployee() {
     }
 
     //Insert the new employee
-    db.query(queryString, (err) => console.log(err));
+    await db.promise().query(queryString)
     
     //Close the database connection
     db.end();
+    ClearScreen();
     //back to the main prompt
-    console.log(`${currentFName} ${currentLNam} was added to the employee table\n`);
-    //Wait 1 second
+    console.log(`${currentFName} ${currentLName} was added to the employee table\n`);
+    //Wait 3 seconds
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 1000){}
+    while ((Date.now() - initTime) <= 3000){}
     MainPrompt();
 }

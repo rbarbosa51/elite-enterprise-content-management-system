@@ -15,16 +15,18 @@ export default async function ViewDepartment() {
         console.log("Connected")
     );
     //Select all from department
-    db.query('SELECT * FROM department ORDER BY id;', (err,result) => {
-        if (err) {
-            console.log(err);
-        }
+    await db.promise().query('SELECT * FROM department ORDER BY id;')
+    .then(([result]) => {
         ClearScreen();
         console.log('Viewing All Departments\n');
         console.table(result);
     })
+    
     //close the connection
     db.end();
+    //Wait 3 seconds
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 3000){}
     //Go back to the main prompt
     MainPrompt();
 }

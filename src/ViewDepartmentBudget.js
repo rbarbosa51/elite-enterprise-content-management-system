@@ -16,9 +16,7 @@ export default async function ViewDepartmentBudget() {
             database: 'eliteEnterpriseCMS'
         },
     )
-    console.log('Outside');
-    
-    console.log('Here -->');
+    //Get all of the departments
     await db.promise().query('SELECT * FROM department ORDER BY id')
         .then(([result]) => {
             result.forEach((d) => {
@@ -29,7 +27,6 @@ export default async function ViewDepartmentBudget() {
         }).catch(err => {
             console.log(err);
         })
-    console.log(departmentNames);
     ClearScreen();
     await inquirer.prompt([
         {

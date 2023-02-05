@@ -23,15 +23,14 @@ export default async function AddDepartment() {
         },
     );
     //Insert query
-    db.query(`INSERT INTO department (name)
-              VALUES ("${departmentName}");`);
+    await db.promise().query(`INSERT INTO department (name) VALUES ("${departmentName}");`)
     //Close the database connection
     db.end();
     ClearScreen();
     console.log(`${departmentName} was added to the department table\n`);
-    //Wait one second before going to Main Propmt
+    //Wait 3 seconds
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 1000){}
+    while ((Date.now() - initTime) <= 3000){}
     MainPrompt();
     
 }

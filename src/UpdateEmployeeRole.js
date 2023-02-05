@@ -73,8 +73,8 @@ export default async function UpdateEmployeeRole() {
     db.end();
 
     console.log(`${currentEmployee} role was changed to ${currentRole}\n`);
-    //Wait 1 second the go back to main prompt
+    //Wait 3 second the go back to main prompt
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 1000){}
+    while ((Date.now() - initTime) <= 3000){}
     MainPrompt();
 }
