@@ -35,7 +35,7 @@ export default async function AddEmployee() {
     });
     //get employees that have null as manager_id (In other words select all managers).
     //managerArray stores both the name of the Manager as well as its id
-    db.query('SELECT id, first_name, last_name FROM employee WHERE manager_id IS NULL;', (err, result) => {
+    db.query('SELECT id, first_name, last_name FROM employee WHERE manager_id IS NULL ORDER BY id;', (err, result) => {
         if (err) {
             console.log(err);
         }
@@ -48,9 +48,8 @@ export default async function AddEmployee() {
             managerArray.push(fullNameID);
         });
         //You still need to compensate in the event the new employee is a manager
+        //Therefor the string is pushed below
         managerNames.push('Employee is a Manager');
-        //debug
-        //console.log(managerArray);
     })
     
     ClearScreen();
@@ -115,5 +114,9 @@ export default async function AddEmployee() {
     //Close the database connection
     db.end();
     //back to the main prompt
+    console.log(`${currentFName} ${currentLNam} was added to the employee table\n`);
+    //Wait 1 second
+    const initTime = Date.now();
+    while ((Date.now() - initTime) <= 1000){}
     MainPrompt();
 }

@@ -11,7 +11,5 @@ async function main() {
     ClearScreen();
     //Initiate the app (main prompt)
     await MainPrompt();
-    //Once the app finishes say thanks for using me
-    console.log('Thanks for using me!\n');
 }
 main();
