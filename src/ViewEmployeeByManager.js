@@ -24,7 +24,7 @@ export default async function ViewEmployeeByManager() {
             const managerID = JSON.parse(`{"id":"${m.id}", "fullName": "${tmpFullName}"}`);
             managerArray.push(managerID);
         });
-        console.log(managerNames);
+        //console.log(managerNames);
     })
     .catch(console.log);
     ClearScreen();

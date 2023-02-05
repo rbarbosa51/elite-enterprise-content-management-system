@@ -9,6 +9,7 @@ import AddEmployee from "./AddEmployee.js";
 import UpdateEmployeeRole from "./UpdateEmployeeRole.js";
 import UpdateEmployeeManager from "./UpdateEmployeeManager.js";
 import ViewEmployeeByManager from './ViewEmployeeByManager.js'
+import ViewEmployeeByDepartment from "./ViewEmployeeByDepartment.js";
 
 export default function MainPrompt() {
     //Clear Screen
@@ -23,7 +24,7 @@ export default function MainPrompt() {
                       'View all employees', 'Add a department', 
                       'Add a role', 'Add an employee', 'Update an employee role', 
                       'Bonus - Update an employee manager', 'Bonus - View employee by manager',
-                      'Quit']
+                      'Bonus - View employee by department','Quit']
         }
     ]).then (answer => {
         switch (answer.mainChoice) {
@@ -53,6 +54,9 @@ export default function MainPrompt() {
                 break;
             case 'Bonus - View employee by manager':
                 ViewEmployeeByManager();
+                break;
+            case 'Bonus - View employee by department':
+                ViewEmployeeByDepartment();
                 break;
             default: //Quit
                 process.exit(0);
