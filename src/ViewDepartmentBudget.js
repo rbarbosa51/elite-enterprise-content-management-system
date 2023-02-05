@@ -4,7 +4,7 @@ import 'console.table';
 import ClearScreen from "./ClearScreen.js";
 import MainPrompt from "./MainPrompt.js";
 
-export default async function ViewEmployeeByDepartment() {
+export default async function ViewDepartmentBudget() {
     let departmentNames = [];
     let departmentArray = [];
     let currentDepartment;
@@ -15,7 +15,10 @@ export default async function ViewEmployeeByDepartment() {
             password: 'toor',
             database: 'eliteEnterpriseCMS'
         },
-    );
+    )
+    console.log('Outside');
+    
+    console.log('Here -->');
     await db.promise().query('SELECT * FROM department ORDER BY id')
         .then(([result]) => {
             result.forEach((d) => {
@@ -23,7 +26,10 @@ export default async function ViewEmployeeByDepartment() {
                 const departmentID = JSON.parse(`{"id":"${d.id}", "fullName": "${d.name}"}`);
                 departmentArray.push(departmentID);
             });
+        }).catch(err => {
+            console.log(err);
         })
+    console.log(departmentNames);
     ClearScreen();
     await inquirer.prompt([
         {
@@ -35,16 +41,19 @@ export default async function ViewEmployeeByDepartment() {
     ]).then( answer => {
         currentDepartment = answer.selectedDepartment;
     })
-    
     let qDepID = (departmentArray.find(o => o.fullName === currentDepartment)).id;
-    //query and show department
-    await db.promise().query(`SELECT employee.id, employee.first_name, employee.last_name FROM employee JOIN role ON employee.role_id=role.id WHERE role.department_id=${qDepID};`)
-        .then( ([result]) => {
-            console.table(result);
-        })
-    db.end()
+    //Query sums all of the salary from the subquery
+    await db.promise().query(`SELECT SUM(sub1.salary) AS department_salary FROM (SELECT salary FROM employee JOIN role ON employee.role_id=role.id WHERE role.department_id=${qDepID})AS sub1;`)
+    .then( ([result]) => {
+        ClearScreen();
+        console.log(`Salary for ${currentDepartment} department\n`);
+        console.table(result);
+    })
+
+
+    db.end();
     //Wait 3 seconds
     const initTime = Date.now();
-    while ((Date.now() - initTime) <= 3000){}
+    while((Date.now() - initTime) <= 3000){}
     MainPrompt();
 }
